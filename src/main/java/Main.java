@@ -6,12 +6,11 @@ public class Main {
 
     public static void main(String [] args) {
         Vertx vertx = Vertx.vertx();
-        WebServerStarter webServerStarter = new WebServerStarter();
 
         int threads = Runtime.getRuntime().availableProcessors();
         System.out.println("Creating " + threads+ " threads");
         for (int i = 0; i < threads; i++) {
-            vertx.deployVerticle(webServerStarter, event -> {
+            vertx.deployVerticle( new WebServerStarter(), event -> {
                 System.out.println("Deployed on Vertx Thread " + Thread.currentThread().getName());
             });
         }
